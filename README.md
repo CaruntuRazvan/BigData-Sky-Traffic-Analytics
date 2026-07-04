@@ -263,6 +263,77 @@ Fiecare mesaj trimis în topicul **zboruri** conține următoarele câmpuri:
 |-----------|------|
 | `/states/all` | Obținerea poziției și stării tuturor aeronavelor din zona Europei |
 
+
+---
+# 📓 Notebook-uri de analiză
+
+Folderul `notebooks/` conține notebook-urile Jupyter utilizate pentru procesarea, analiza și modelarea datelor colectate.
+
+---
+
+## 1. 01_Data_Processing_and_Analysis.ipynb
+
+Acest notebook realizează etapa de preprocesare și analiză exploratorie a datelor istorice colectate prin `collect_history.py`.
+
+### Funcționalități
+
+- încărcarea fișierului `history_traffic.csv`;
+- curățarea și validarea datelor;
+- transformarea și agregarea informațiilor folosind **Apache Spark DataFrame API**;
+- efectuarea de interogări folosind **Spark SQL**;
+- analiza distribuției traficului aerian pe:
+  - aeroporturi;
+  - zile ale săptămânii;
+  - intervale orare;
+  - tipuri de zboruri (sosiri/plecări);
+- generarea setului de date agregat `hourly_traffic.csv`, utilizat ulterior de modelele de Machine Learning.
+
+---
+
+## 2. 02_Machine_Learning_Models.ipynb
+
+Acest notebook implementează modelele de Machine Learning și Deep Learning utilizate în proiect.
+
+| Model | Tehnologie | Scop |
+|--------|------------|------|
+| Random Forest Regressor | Spark MLlib | Predicția numărului de zboruri pe oră pentru fiecare aeroport |
+| K-Means | Spark MLlib | Gruparea aeroporturilor în funcție de profilul traficului aerian |
+| LSTM | TensorFlow / Keras | Prognoza evoluției traficului aerian pe baza seriilor temporale |
+
+Datele de intrare sunt reprezentate de fișierul `hourly_traffic.csv`, generat în Notebook-ul 1.
+
+---
+
+## 3. 03_RealTime_Streaming_Process.ipynb
+
+Acest notebook implementează componenta de procesare în timp real utilizând Apache Kafka și Spark Structured Streaming.
+
+### Fluxul de procesare
+
+```
+OpenSky Network API
+        │
+        ▼
+ producer.py
+        │
+        ▼
+Apache Kafka (Topic: zboruri)
+        │
+        ▼
+Spark Structured Streaming
+        │
+        ▼
+Procesare și clasificare în timp real
+```
+
+### Funcționalități
+
+- consumarea mesajelor din topicul Kafka `zboruri`;
+- procesarea datelor în micro-batch-uri;
+- detectarea aeronavelor aflate în apropierea aeroporturilor (Geofencing);
+- clasificarea stării aeronavelor (de exemplu: În apropiere, La sol, În zbor);
+- generarea rapoartelor privind traficul aerian în timp real.
+
 ---
 
 # 📁 Structura proiectului
@@ -270,16 +341,27 @@ Fiecare mesaj trimis în topicul **zboruri** conține următoarele câmpuri:
 ```
 project/
 │
-├── data/
-│   └── history_traffic.csv
 │
-├── kafka/
+├── data/
+│   ├── history_traffic.csv
+│   └── hourly_traffic.csv
+│
+├── notebooks/
+│   ├── 01_Data_Processing_and_Analysis.ipynb
+│   ├── 02_Machine_Learning_Models.ipynb
+│   └── 03_RealTime_Streaming_Process.ipynb
+│
+├── src/
+│   └── collect_history.py
+│
+├── streaming-service/
+│   ├── docker-compose.yml
 │   └── producer.py
 │
-├── collect_history.py
-├── docker-compose.yml
+├── .gitignore
 ├── credentials.json
-└── README.md
+├── README.md
+└── requirements.txt
 ```
 
 ---
