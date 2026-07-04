@@ -1,0 +1,21 @@
+.vscode/
+
+__pycache__/
+*.pyc
+venv/
+.venv/
+env/
+.env
+
+# --- Date și Resurse (Opțional, dar recomandat) ---
+# Dacă fișierele CSV sunt mari sau conțin date private, ignoră-le
+# data/*.csv
+
+.ipynb_checkpoints/
+
+models/rf_model/
+
+credentials.json
+
+*.log
+raport_trafic_aerian.txt
