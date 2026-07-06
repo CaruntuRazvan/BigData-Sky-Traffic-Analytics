@@ -1,4 +1,4 @@
-# ✈️ Air Traffic Monitoring Platform (OpenSky API)
+# ✈️ Sistem de Analiză și Predicție a Traficului Aerian (OpenSky API)
 
 ## Descriere
 
@@ -88,7 +88,7 @@ Script:
 collect_history.py
 ```
 
-Acest script descarcă istoricul zborurilor pentru următoarele aeroporturi:
+Pentru perioada **04-04-2026** – **05-07-2026**, acest script descarcă istoricul zborurilor pentru următoarele aeroporturi:
 
 - LROP – București Otopeni
 - EGLL – London Heathrow
@@ -207,15 +207,15 @@ Fișier:
 history_traffic.csv
 ```
 
-| Câmp | Tip | Descriere |
-|------|-----|-----------|
-| icao24 | String | Identificator unic al aeronavei |
-| callsign | String | Indicativul zborului |
-| airport | String | Aeroport monitorizat |
-| type | String | arrival / departure |
-| arrival_hour | Integer | Ora producerii evenimentului |
-| day_of_week | Integer | Ziua săptămânii (0=Luni) |
-| date | Date | Data calendaristică |
+| Câmp         | Tip     | Descriere                       |
+| ------------ | ------- | ------------------------------- |
+| icao24       | String  | Identificator unic al aeronavei |
+| callsign     | String  | Indicativul zborului            |
+| airport      | String  | Aeroport monitorizat            |
+| type         | String  | arrival / departure             |
+| arrival_hour | Integer | Ora producerii evenimentului    |
+| day_of_week  | Integer | Ziua săptămânii (0=Luni)        |
+| date         | Date    | Data calendaristică             |
 
 ---
 
@@ -223,26 +223,26 @@ history_traffic.csv
 
 Fiecare mesaj trimis în topicul **zboruri** conține următoarele câmpuri:
 
-| Câmp | Descriere |
-|------|-----------|
-| timestamp | Timestamp-ul snapshot-ului OpenSky |
-| icao24 | Identificator unic al aeronavei |
-| callsign | Indicativul zborului |
-| origin_country | Țara de origine |
-| latitude | Latitudine |
-| longitude | Longitudine |
-| baro_altitude | Altitudine barometrică |
-| geo_altitude | Altitudine geometrică |
-| velocity | Viteza aeronavei (m/s) |
-| true_track | Direcția de deplasare (grade) |
-| vertical_rate | Viteza de urcare/coborâre (m/s) |
-| time_position | Ultimul timestamp al poziției |
-| last_contact | Ultimul contact cu aeronava |
-| on_ground | Indicator dacă aeronava este la sol |
-| position_source | Sursa poziției (ADS-B etc.) |
-| category | Categoria aeronavei |
-| squawk | Codul transponderului |
-| spi | Indicator Special Position Identification |
+| Câmp            | Descriere                                 |
+| --------------- | ----------------------------------------- |
+| timestamp       | Timestamp-ul snapshot-ului OpenSky        |
+| icao24          | Identificator unic al aeronavei           |
+| callsign        | Indicativul zborului                      |
+| origin_country  | Țara de origine                           |
+| latitude        | Latitudine                                |
+| longitude       | Longitudine                               |
+| baro_altitude   | Altitudine barometrică                    |
+| geo_altitude    | Altitudine geometrică                     |
+| velocity        | Viteza aeronavei (m/s)                    |
+| true_track      | Direcția de deplasare (grade)             |
+| vertical_rate   | Viteza de urcare/coborâre (m/s)           |
+| time_position   | Ultimul timestamp al poziției             |
+| last_contact    | Ultimul contact cu aeronava               |
+| on_ground       | Indicator dacă aeronava este la sol       |
+| position_source | Sursa poziției (ADS-B etc.)               |
+| category        | Categoria aeronavei                       |
+| squawk          | Codul transponderului                     |
+| spi             | Indicator Special Position Identification |
 
 ---
 
@@ -250,21 +250,21 @@ Fiecare mesaj trimis în topicul **zboruri** conține următoarele câmpuri:
 
 ## collect_history.py
 
-| Endpoint | Scop |
-|-----------|------|
-| `/flights/arrival` | Obținerea zborurilor sosite într-un aeroport |
+| Endpoint             | Scop                                           |
+| -------------------- | ---------------------------------------------- |
+| `/flights/arrival`   | Obținerea zborurilor sosite într-un aeroport   |
 | `/flights/departure` | Obținerea zborurilor plecate dintr-un aeroport |
 
 ---
 
 ## producer.py
 
-| Endpoint | Scop |
-|-----------|------|
+| Endpoint      | Scop                                                              |
+| ------------- | ----------------------------------------------------------------- |
 | `/states/all` | Obținerea poziției și stării tuturor aeronavelor din zona Europei |
 
-
 ---
+
 # 📓 Notebook-uri de analiză
 
 Folderul `notebooks/` conține notebook-urile Jupyter utilizate pentru procesarea, analiza și modelarea datelor colectate.
@@ -290,15 +290,15 @@ Acest notebook realizează etapa de preprocesare și analiză exploratorie a dat
 
 ---
 
-## 2. 02_Machine_Learning_Models.ipynb
+## 2. 02_Modeling_and_Evaluation.ipynb
 
 Acest notebook implementează modelele de Machine Learning și Deep Learning utilizate în proiect.
 
-| Model | Tehnologie | Scop |
-|--------|------------|------|
-| Random Forest Regressor | Spark MLlib | Predicția numărului de zboruri pe oră pentru fiecare aeroport |
-| K-Means | Spark MLlib | Gruparea aeroporturilor în funcție de profilul traficului aerian |
-| LSTM | TensorFlow / Keras | Prognoza evoluției traficului aerian pe baza seriilor temporale |
+| Model                   | Tehnologie         | Scop                                                             |
+| ----------------------- | ------------------ | ---------------------------------------------------------------- |
+| Random Forest Regressor | Spark MLlib        | Predicția numărului de zboruri pe oră pentru fiecare aeroport    |
+| K-Means                 | Spark MLlib        | Gruparea aeroporturilor în funcție de profilul traficului aerian |
+| LSTM                    | TensorFlow / Keras | Prognoza evoluției traficului aerian pe baza seriilor temporale  |
 
 Datele de intrare sunt reprezentate de fișierul `hourly_traffic.csv`, generat în Notebook-ul 1.
 
@@ -348,7 +348,7 @@ project/
 │
 ├── notebooks/
 │   ├── 01_Data_Processing_and_Analysis.ipynb
-│   ├── 02_Machine_Learning_Models.ipynb
+│   ├── 02_Modeling_and_Evaluation.ipynb
 │   └── 03_RealTime_Streaming_Process.ipynb
 │
 ├── src/
@@ -412,4 +412,3 @@ python producer.py
 ```
 
 Producer-ul va trimite automat un nou snapshot al traficului aerian la fiecare **60 de secunde** în topicul Kafka **zboruri**.
-

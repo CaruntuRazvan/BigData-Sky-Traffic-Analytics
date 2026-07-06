@@ -3,7 +3,7 @@ from nbformat.v4 import new_markdown_cell
 
 files = [
     "01_Data_Processing_and_Analysis.ipynb",
-    "02_Machine_Learning_Models.ipynb",
+    "02_Modeling_and_Evaluation.ipynb",
     "03_RealTime_Streaming_Process.ipynb"
 ]
 

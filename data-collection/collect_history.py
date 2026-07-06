@@ -38,7 +38,7 @@ SLEEP_SEC   = 15
 MAX_RETRIES = 3
 
 
-DAYS_BACK = 81 if MODE == "full" else 1
+DAYS_BACK = 93 if MODE == "full" else 1
 
 fields = [
     "icao24", "callsign", "airport", "type",

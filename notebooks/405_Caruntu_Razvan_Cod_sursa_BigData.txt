@@ -1,0 +1,13 @@
+Student: Caruntu Razvan
+Grupa: 405
+
+1. Cod Sursă: https://github.com/CaruntuRazvan/BigData-Sky-Traffic-Analytics
+2. Set de Date: https://github.com/CaruntuRazvan/BigData-Sky-Traffic-Analytics/tree/main/data
+
+Fluxul Notebook-urilor:
+
+- 01_Data_Processing_and_Analysis.ipynb (Cerințele 1-2): Procesează datele brute și generează fișierul de antrenare.
+
+- 02_Modeling_and_Evaluation.ipynb (Cerințele 3-6): Antrenează și evaluează modelele ML/DL.
+
+- 03_RealTime_Streaming_Process.ipynb (Cerința 7): Implementează procesarea în timp real.
